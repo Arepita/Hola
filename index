@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bubbles love</title>
+    <link rel="stylesheet" href="style.css" />
+    <style>
+      #audio-control {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background-color: rgba(255, 255, 255, 0.8);
+        border: none;
+        padding: 12px 20px;
+        border-radius: 30px;
+        font-size: 16px;
+        color: #d63384;
+        font-weight: bold;
+        cursor: pointer;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+        z-index: 10;
+        transition: background-color 0.3s ease;
+      }
+
+      #audio-control:hover {
+        background-color: rgba(255, 255, 255, 1);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="message">I Love You, My Beth ❤️</div>
+    <div id="bubbles-text"></div>
+
+    <!-- Audio -->
+    <audio id="musica" loop>
+      <source src="Greed.mp3" type="audio/mpeg" />
+      Tu navegador no soporta el elemento de audio.
+    </audio>
+
+    <!-- Botón para reproducir/pausar música -->
+    <button id="audio-control">▶️ Reproducir música</button>
+
+    <!-- Script para controlar audio -->
+    <script>
+      const audio = document.getElementById("musica");
+      const audioBtn = document.getElementById("audio-control");
+
+      // Reproducir/pausar con botón
+      audioBtn.addEventListener("click", () => {
+        if (audio.paused) {
+          audio.play();
+          audioBtn.textContent = "⏸️ Pausar música";
+        } else {
+          audio.pause();
+          audioBtn.textContent = "▶️ Reproducir música";
+        }
+      });
+
+      // Intentar reproducir si el usuario hace clic en cualquier parte
+      document.addEventListener("click", () => {
+        if (audio && audio.paused) {
+          audio.play().then(() => {
+            audioBtn.textContent = "⏸️ Pausar música";
+          }).catch(() => {
+            // Ignorado si el navegador no lo permite sin interacción
+          });
+        }
+      });
+    </script>
+
+    <!-- Tu script de burbujas -->
+    <script src="script.js"></script>
+  </body>
+</html>
